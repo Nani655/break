@@ -1,0 +1,47 @@
+local lp = game:GetService("Players").LocalPlayer
+lp.DevEnableMouseLock = true
+local x = Instance.new("Hint", workspace)
+x.Text = "Grab the shiny key. The rest are fake."
+
+for i, v in pairs(workspace:GetDescendants()) do
+		
+    if v.Name == "Lid" and not v.Parent.Name == "Box" or string.find(v.Name, "Door") and not string.find(v.Name, "Glass") then
+    v:Destroy()
+   	end
+
+    if string.find(v.Name, "Real") and v:IsA("BasePart") then
+    v.Material = Enum.Material.Neon
+    end
+
+    if v:IsA("ClickDetector") then
+    v.MaxActivationDistance = math.huge
+    end
+
+    if v:IsA("Model") and v:FindFirstChild("Cog") then
+    v:Destroy()
+    end
+
+    if v:IsA("Part") and v.Position == Vector3.new(195.25, 7.5, 197) then
+    v.Size = Vector3.new(61.5, 13, 126.92) 
+    v.Position = Vector3.new(195.25, 7.5, 143.04)
+    end
+
+    if v:IsA("UnionOperation") and v.Size == Vector3.new(8, 11, 10) then
+    v:Destroy()
+    end
+
+end
+
+local oof = workspace:FindFirstChild("HoldEmBack")
+
+if oof then 
+	oof:Destroy()
+end
+    
+ workspace.DescendantAdded:Connect(function(z)
+	x.Text = "Go to one of the boxes emitting sparkles and take that key."
+    if z.Name == "Key3" or z.Name == "Key4" or z.Name == "Key5" then
+    Instance.new("Sparkles", z)
+    end
+
+end)
